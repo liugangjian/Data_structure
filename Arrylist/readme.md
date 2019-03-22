@@ -3,6 +3,4 @@
 2. 结构体
 3. 动态内存的分配和释放
 
-关于数据结构的概述及所需预备知识总结如下图所示：
-![](http://po4tl1gtx.bkt.clouddn.com/Fs8RIgbsuyz8zkyLtYjV1cvSs-n3)
 
