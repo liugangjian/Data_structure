@@ -3,4 +3,8 @@
 2. 结构体
 3. 动态内存的分配和释放
 
+数据结构概述及学习所需预备知识总结如下：
+
+![](http://po4tl1gtx.bkt.clouddn.com/Fs8RIgbsuyz8zkyLtYjV1cvSs-n3)
+
 
