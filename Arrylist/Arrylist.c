@@ -13,6 +13,8 @@ struct Arr
 
 // 初始化数组 
 bool init(struct Arr * Arrlist,int length);
+// 销毁数组 
+void destroy(struct Arr *pArr);
 // 增 
 bool append(struct Arr * Arrlist);
 bool insert(struct Arr * Arrlist, int pos, int val);
@@ -43,16 +45,16 @@ int main(){
 	init(&arr,length);
 	append(&arr);
 	
-	//insert(&arr,2,1222);
+	insert(&arr,2,1222);
 	//delate(&arr,2);
 	
 	//sortArr(&arr);
 	//invension(&arr);
 	
-	
 	search1(&arr,2);
 	search2(&arr,3);
 	showArr(&arr);
+	destroy(&arr);
 		
 	return 0;
 }
@@ -71,6 +73,13 @@ bool init(struct Arr *pArr, int length){
 	}
 	return; 
 }
+
+void destroy(struct Arr *pArr){
+	free(pArr->pfrist);
+	pArr -> pfrist = NULL;
+	pArr -> len = 0;
+	pArr -> count = 0; 
+} 
 
 void showArr(struct Arr *pArr){
 	int i;
@@ -113,7 +122,7 @@ bool append(struct Arr *pArr){
 	}
 }
 
-bool insert(struct Arr * pArr, int pos, int val){
+/*bool insert(struct Arr * pArr, int pos, int val){
 	int i;
 	if ( pos < 0 || pos > pArr -> count ){
 		printf("the pos is illegal");
@@ -123,9 +132,9 @@ bool insert(struct Arr * pArr, int pos, int val){
 	else
 	{
 		for( i = pArr->count-1; i >= pos-1; i-- )
-		{
-			/*神奇之处在于此时的pfrist[i+1]已经越过 
-			malloc所指定范围，但仍可以越界访问内存空间*/ 
+		{ 
+			// 神奇之处在于此时的pfrist[i+1]已经越过 
+			// malloc所指定范围，但仍可以越界访问内存空间 
 			pArr -> pfrist[i+1] = pArr -> pfrist[i];
 		}
 		pArr -> count ++;
@@ -133,7 +142,32 @@ bool insert(struct Arr * pArr, int pos, int val){
 		pArr -> pfrist[pos-1]=val;
 		return true;
 	}
+}*/
+
+bool insert(struct Arr * pArr, int pos, int val){
+	int i;
+	int newbase;
+	if ( pos < 0 || pos > pArr -> count ){
+		printf("the pos is illegal");
+		return false;
+	}
+	
+	// 当前内存空间已满，增加分配 
+	if ( pArr -> count == pArr -> len ){
+		newbase = (int *)realloc(pArr -> pfrist,sizeof(int)*(pArr -> count + 1));
+		pArr -> pfrist = newbase; 
+	} 
+		
+	for( i = pArr->count-1; i >= pos-1; i-- )
+		pArr -> pfrist[i+1] = pArr -> pfrist[i];
+	pArr -> count ++;
+	pArr -> len ++;
+	pArr -> pfrist[pos-1]=val;
+	return true;
+	
 }
+
+
 
 bool delate(struct Arr * pArr, int pos){
 	int tem;
