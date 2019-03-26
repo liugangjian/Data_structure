@@ -146,7 +146,7 @@ bool append(struct Arr *pArr){
 
 bool insert(struct Arr * pArr, int pos, int val){
 	int i;
-	int newbase;
+	int * newbase;
 	if ( pos < 0 || pos > pArr -> count ){
 		printf("the pos is illegal");
 		return false;
