@@ -1,3 +1,4 @@
+/* 编译环境：DEV C++ */
 # include<stdio.h>
 # include<malloc.h>
 # define Maxsize 100
